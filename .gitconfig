@@ -1,0 +1,17 @@
+# This is Git's per-user configuration file.
+[user]
+	name = Jules de Smit
+	email = julesdesmit@gmail.com
+[diff "nodiff"]
+	command = /usr/bin/true
+[alias]
+ 	st = status
+ 	br = branch
+ 	ci = commit
+ 	lg = log --graph --pretty=format:'%C(bold red)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+ 	wt = worktree
+ 	co = checkout
+[color]
+	ui = auto
+[init]
+	defaultBranch = main
