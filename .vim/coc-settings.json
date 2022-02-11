@@ -1,0 +1,7 @@
+{
+    "diagnostic.enable": false,
+    "rust-analyzer.completion.addCallParenthesis": false,
+    "rust-analyzer.diagnostics.enable": false,
+    "rust-analyzer.diagnostics.enableExperimental": false
+}
+
