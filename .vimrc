@@ -27,12 +27,8 @@ call plug#begin(expand('~/.vim/plugged'))
 
 Plug 'scrooloose/nerdtree'
 
-if isdirectory('/usr/local/opt/fzf')
-    Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
-else
-    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
-    Plug 'junegunn/fzf.vim'
-endif
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 let g:make = 'gmake'
 if exists('make')
     let g:make = 'make'
@@ -41,10 +37,12 @@ endif
 Plug 'itchyny/lightline.vim'
 
 "****************************************************
-"" Development Bundle
+" Development Bundle
 "****************************************************
 Plug 'fatih/vim-go', {'do': ':GoInstallBinaries'}			"golang support
-Plug 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim'                                   "rust support
+Plug 'neoclide/coc.nvim', {'branch': 'release'}             "language server
+Plug 'wakatime/vim-wakatime'                                "time tracker
 
 call plug#end()
 
@@ -57,16 +55,23 @@ inoremap jk <esc>
 let mapleader="\<Space>"
 nnoremap <leader>w :w<CR>
 
+" Insert mode cursor should be a block
+set guicursor=i:block
+
+" Colorscheme (because i cant do 16 bit coloring in neovim lol)
+colorscheme iceberg
+
 " Easy window switch
 nnoremap <C-j> <C-w>j
 nnoremap <C-h> <C-w>h
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" Set tabs two spaces
+" Set tabs four spaces
 set softtabstop=4
 set shiftwidth=4
 set tabstop=4
+set expandtab
 
 " Searching "{{{
 set hlsearch
@@ -132,3 +137,32 @@ nnoremap <C-g> :Rg<CR>
 
 let g:rustfmt_autosave = 1
 "let g:rustfmt_options = '--edition 2018'
+
+" CoC stuff
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("nvim-0.5.0") || has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+" highlight Pmenu ctermfg=15 guibg=Grey ctermbg=7 
