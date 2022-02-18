@@ -2,6 +2,8 @@
     "diagnostic.enable": false,
     "rust-analyzer.completion.addCallParenthesis": false,
     "rust-analyzer.diagnostics.enable": false,
-    "rust-analyzer.diagnostics.enableExperimental": false
+    "rust-analyzer.diagnostics.enableExperimental": false,
+    "rust-analyzer.inlayHints.enable": false,
+    "rust-analyzer.inlayHints.typeHints": false
 }
 
