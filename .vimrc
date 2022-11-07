@@ -43,6 +43,12 @@ Plug 'fatih/vim-go', {'do': ':GoInstallBinaries'}			"golang support
 Plug 'rust-lang/rust.vim'                                   "rust support
 Plug 'neoclide/coc.nvim', {'branch': 'release'}             "language server
 Plug 'wakatime/vim-wakatime'                                "time tracker
+Plug 'TovarishFin/vim-solidity'                             "solidity support
+Plug 'petRUShka/vim-sage'                                   "sage support
+Plug 'modocache/move.vim'                                   "move support
+Plug 'julesdesmit/aleo.vim'                                 "aleo support
+Plug 'yuezk/vim-js'                                         "js support
+Plug 'github/copilot.vim'                                   "lazy programming buddy
 
 call plug#end()
 
@@ -166,3 +172,4 @@ function! s:show_documentation()
 endfunction
 
 " highlight Pmenu ctermfg=15 guibg=Grey ctermbg=7 
+
